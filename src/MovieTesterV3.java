@@ -27,10 +27,12 @@ public class MovieTesterV3 {
     printMovies(wishlist);
 
     System.out.println("Movie Table after sorting by title in ascending order");
-    // printMovies(sortByTitle(wishlist, 1));
+    sortByTitle(wishlist, 1);
+    printMovies(wishlist);
 
     System.out.println("Movie Table after sorting by title in descending order");
-    // printMovies(sortByTitle(wishlist, 2));
+    sortByTitle(wishlist, 2);
+    printMovies(wishlist);
 
     System.out.println("Movie Table after sorting by year in ascending order");
     sortByYear(wishlist, 1);
@@ -41,10 +43,12 @@ public class MovieTesterV3 {
     printMovies(wishlist);
 
     System.out.println("Movie Table after sorting by studio in ascending order");
-    // printMovies(sortByStudio(wishlist, 1));
+    sortByStudio(wishlist, 1);
+    printMovies(wishlist);
 
     System.out.println("Movie Table after sorting by studio in in descending order");
-    // printMovies(sortByStudio(wishlist, 2));
+    sortByStudio(wishlist, 2);
+    printMovies(wishlist);
   }
 
   public static void printMovies(Movie[] movieList) {
@@ -56,9 +60,29 @@ public class MovieTesterV3 {
     System.out.println();
   }
 
-  // public static Movie [] sortByTitle(Movie [] movieList, int order){
+  public static void sortByTitle(Movie[] movieList, int order) {
+    int i;
+    int k;
+    int maxIndex;
+    Movie temp;
 
-  // }
+    for (i = movieList.length - 1; i >= 0; i--) {
+      // find largest element in the i elements
+      maxIndex = 0;
+      for (k = 0; k <= i; k++) {
+        if (movieList[k].getTitle().compareTo(movieList[maxIndex].getTitle()) > 0 && order == 1)
+          maxIndex = k;
+        else if (movieList[k].getTitle().compareTo(movieList[maxIndex].getTitle()) < 0 && order == 2) {
+          maxIndex = k;
+        }
+      }
+      // swap the largest with the position i
+      // now the item is in its proper location
+      temp = movieList[i];
+      movieList[i] = movieList[maxIndex];
+      movieList[maxIndex] = temp;
+    }
+  }
 
   public static void sortByYear(Movie[] movieList, int order) {
     int i;
@@ -84,7 +108,27 @@ public class MovieTesterV3 {
     }
   }
 
-  // public static Movie [] sortByStudio(Movie [] movieList, int order){
+  public static void sortByStudio(Movie[] movieList, int order) {
+    int i;
+    int k;
+    int maxIndex;
+    Movie temp;
 
-  // }
+    for (i = movieList.length - 1; i >= 0; i--) {
+      // find largest element in the i elements
+      maxIndex = 0;
+      for (k = 0; k <= i; k++) {
+        if (movieList[k].getStudio().compareTo(movieList[maxIndex].getStudio()) > 0 && order == 1)
+          maxIndex = k;
+        else if (movieList[k].getStudio().compareTo(movieList[maxIndex].getStudio()) < 0 && order == 2) {
+          maxIndex = k;
+        }
+      }
+      // swap the largest with the position i
+      // now the item is in its proper location
+      temp = movieList[i];
+      movieList[i] = movieList[maxIndex];
+      movieList[maxIndex] = temp;
+    }
+  }
 }
